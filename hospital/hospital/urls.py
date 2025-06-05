@@ -17,6 +17,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from users.views import *
+from patients.views import *
+from doctors.views import *
+
+from mappings.views import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/auth/register/', RegisterView.as_view()),
+    path('api/auth/login/',LoginView.as_view()),
+    
+    # Patients URLs
+    path('api/patients/', PatientListCreateView.as_view()),
+    path('api/patients/<int:pk>/',PatientDetailView.as_view()),
+    
+    # Doctors URLs
+    path('api/doctors/', DoctorListCreateView.as_view()),
+    path('api/doctors/<int:pk>/', DoctorDetailView.as_view()),
+    
+    # Mappings URLs
+        path('api/mappings/', MappingListCreateView.as_view()),
+    path('api/mappings/<int:patient_id>/',MappingDetailView.as_view()),
+    path('api/mappings/<int:pk>/',MappingDeleteView.as_view()),
+
 ]

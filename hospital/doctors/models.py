@@ -7,6 +7,7 @@ class Doctor(models.Model):
     specialization = models.CharField(max_length=100)
     experience_years = models.PositiveIntegerField()
     contact_number = models.CharField(max_length=15)
+    is_deleted = models.BooleanField(default=False)
     
     def __str__(self):
         return f"Dr. {self.name} - {self.specialization}"
