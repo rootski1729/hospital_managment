@@ -12,4 +12,4 @@ class Patient(models.Model):
     is_deleted = models.BooleanField(default=False)
     
     def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.user.username})"
+        return f"{self.first_name} {self.last_name} "

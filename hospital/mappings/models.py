@@ -14,7 +14,7 @@ class patientDoctorMapping(models.Model):
     
     def save(self, *args, **kwargs):
         if self.patient.is_deleted:
-            raise ValueError("Cannot assign a deleted patient.")
+            raise ValueError("Cannot assign, patient does not exist.")
         if self.doctor.is_deleted:
-            raise ValueError("Cannot assign a deleted doctor.")
+            raise ValueError("Cannot assign, doctor does not exist.")
         super().save(*args, **kwargs)

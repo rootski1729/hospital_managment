@@ -44,9 +44,7 @@ class PatientDetailView(APIView):
         try:
             patient = Patient.objects.get(pk=pk, is_deleted=False)
             serializer = PatientSerializer(patient)
-            if serializer.is_valid():
-                return Response({"patient": serializer.data}, status=status.HTTP_200_OK)
-            return Response({"error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"patient": serializer.data}, status=status.HTTP_200_OK)
         except Patient.DoesNotExist:
             return Response({"error": "Patient not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:

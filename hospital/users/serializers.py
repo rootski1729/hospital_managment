@@ -5,10 +5,11 @@ from django.contrib.auth.password_validation import validate_password
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
+    is_staff = serializers.BooleanField(default=True)  
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password']
+        fields = ['id', 'username', 'email', 'password', 'is_staff']
 
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -16,4 +17,5 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             password=validated_data['password']
         )
+        user.is_staff = validated_data.get('is_staff', False)
         return user
